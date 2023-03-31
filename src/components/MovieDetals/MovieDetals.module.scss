@@ -1,0 +1,33 @@
+.cardFilm {
+    display: flex;
+    align-items: center;
+}
+
+.title {
+    margin-bottom: 25px;
+}
+
+.img {
+    width: 250px;
+    margin-right: 50px;
+}
+
+.score {
+    margin-bottom: 30px;
+}
+.imgNot {
+    background-color: #898989;
+}
+.cast,.reviews {
+color: #0104af;
+text-decoration: none;
+margin: 30px;
+font-size: 20px;
+line-height: 1.4;
+text-transform: uppercase;
+&:hover,&:focus{
+    background-color: #0104af;
+    border-radius: 10px;
+    color: #fff200;
+}
+}
