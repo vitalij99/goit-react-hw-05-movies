@@ -1,0 +1,28 @@
+.header {       
+    
+    background-color: #0104af;
+    padding: 10px 40px;
+    box-shadow: 0px 5px 20px 2px #0206ffb2;
+}
+.list {
+    display: flex;
+    list-style: none;
+    gap: 30px;
+}
+.link,
+.active {
+    font-size: 18px;
+    color: #f2ff00bf;
+    text-decoration: none;
+    
+
+    &:hover {
+        color: #fff200;
+    }
+   
+}
+    
+.active {
+    color: #fff200;
+}
+
