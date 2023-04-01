@@ -2,21 +2,25 @@ import { fetchMovie } from 'api/api';
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import style from './Reviews.module.scss';
+import { Loader } from 'components/Loader/Loader';
 
 const Reviews = () => {
   const [review, setReview] = useState(null);
   const { movieId } = useParams();
+  const [showLoading, setShowLoading] = useState(false);
 
   useEffect(() => {
+    setShowLoading(true);
     fetchMovie(`movie/${movieId}/reviews`)
       .then(data => {
         setReview(data.results);
+        setShowLoading(false);
       })
       .catch(console.log);
   }, [movieId]);
 
   if (!review) {
-    return;
+    return <>{showLoading && <Loader />}</>;
   }
 
   return (

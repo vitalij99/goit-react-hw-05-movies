@@ -3,19 +3,25 @@ import { useState, useEffect } from 'react';
 
 import style from './Cast.module.scss';
 import { fetchMovie } from 'api/api';
+import { Loader } from 'components/Loader/Loader';
 
 const Cast = () => {
   const [cast, setCast] = useState(null);
   const { movieId } = useParams();
+  const [showLoading, setShowLoading] = useState(false);
 
   useEffect(() => {
+    setShowLoading(true);
     fetchMovie(`movie/${movieId}/credits`)
-      .then(data => setCast(data.cast))
+      .then(data => {
+        setCast(data.cast);
+        setShowLoading(false);
+      })
       .catch(console.log);
   }, [movieId]);
 
   if (!cast) {
-    return;
+    return <>{showLoading && <Loader />}</>;
   }
 
   return (

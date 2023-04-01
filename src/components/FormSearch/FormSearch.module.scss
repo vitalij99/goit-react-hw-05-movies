@@ -1,0 +1,17 @@
+.wrap{
+    padding: 20px;
+}
+.input{
+    padding: 5px;
+}
+.button {
+    margin-left: 10px;
+        color: #0104af;
+            
+            &:hover,
+                &:focus {
+                    background-color: #0104af;
+                    color: #fff200;
+            
+                }
+}

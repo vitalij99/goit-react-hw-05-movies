@@ -1,23 +1,27 @@
 import { fetchMovie } from 'api/api';
 import { useEffect, useState } from 'react';
-import { Link, Outlet, useLocation, useParams } from 'react-router-dom';
+import { Link, Outlet, useParams } from 'react-router-dom';
 import style from './MovieDetals.module.scss';
+import BtnBack from 'components/BtnBack/BtnBack';
+import { Loader } from 'components/Loader/Loader';
 
 const MovieDetals = () => {
   const [movie, setMovie] = useState(null);
   const { movieId } = useParams();
-  const location = useLocation();
+  const [showLoading, setShowLoading] = useState(false);
 
   useEffect(() => {
+    setShowLoading(true);
     fetchMovie(`movie/${movieId}`)
       .then(data => {
         setMovie(data);
+        setShowLoading(false);
       })
       .catch(console.log);
   }, [movieId]);
 
   if (!movie) {
-    return;
+    return <>{showLoading && <Loader />}</>;
   }
   const {
     title,
@@ -32,9 +36,10 @@ const MovieDetals = () => {
 
   const imgUrl = `https://image.tmdb.org/t/p/w500${poster_path}`;
 
+  const userScore = vote_average.toFixed(1);
   return (
     <>
-      <Link to={location.state}>Back</Link>
+      <BtnBack />
       <div className={style.cardFilm}>
         {!poster_path ? (
           <div className={style.imgNot} />
@@ -51,7 +56,7 @@ const MovieDetals = () => {
             {title || name} ({(first_air_date || release_date).slice(0, 4)})
           </h2>
 
-          <p className={style.score}>User Score: {vote_average}/10</p>
+          <p className={style.score}>User Score: {userScore}/10</p>
 
           <h3>Overview</h3>
           <p>{overview}</p>
