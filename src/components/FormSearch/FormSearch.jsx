@@ -28,5 +28,5 @@ export default FormSearch;
 
 FormSearch.prototype = {
   setSearchParams: PropTypes.func,
-  searchParams: PropTypes.func,
+  searchParams: PropTypes.object,
 };
